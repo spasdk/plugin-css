@@ -1,0 +1,61 @@
+/**
+ * @author Stanislav Kalashnik <darkpark.main@gmail.com>
+ * @license GNU GENERAL PUBLIC LICENSE Version 3
+ */
+
+'use strict';
+
+var path     = require('path'),
+    extend   = require('extend'),
+    config   = require('spa-plugin/config'),
+    pkgData  = require(path.join(process.cwd(), 'package.json')),
+    profiles = {},
+    modules  = ['spa-app', 'spa-component'];
+
+
+function preparePaths ( name ) {
+    var paths = modules.map(function ( moduleName ) {
+        return path.join('node_modules', moduleName, 'css', name + '.css');
+    });
+
+    paths.push(path.join(config.source, 'css', name + '.css'));
+
+    return paths;
+}
+
+
+Object.keys(pkgData.dependencies || {}).concat(Object.keys(pkgData.devDependencies || {})).forEach(function ( name ) {
+    if ( name.indexOf('spa-component-') === 0 ) {
+        modules.push(name);
+    }
+});
+
+
+// main
+profiles.default = extend(true, {}, config, {
+    // main entry point
+    source: preparePaths('release'),
+
+    // intended output file
+    target: path.join(config.target, 'css', 'release.css')
+});
+
+// array of globs to monitor
+//profiles.default.watch = profiles.default.source;
+profiles.default.watch = path.join(config.source, 'css', '**', 'release*');
+
+
+profiles.develop = extend(true, {}, profiles.default, {
+    // main entry point
+    source: preparePaths('develop'),
+
+    // intended output file
+    target: path.join(config.target, 'css', 'develop.css')
+});
+
+// array of globs to monitor
+//profiles.develop.watch = profiles.develop.source;
+profiles.develop.watch = path.join(config.source, 'css', '**', 'develop*');
+
+// public
+module.exports = profiles;
