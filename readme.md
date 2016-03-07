@@ -1,4 +1,4 @@
-Compile HTML files from Jade sources
+Compile CSS from partial CSS sources
 ====================================
 
 [![NPM version](https://img.shields.io/npm/v/spa-plugin-css.svg?style=flat-square)](https://www.npmjs.com/package/spa-plugin-css)
