@@ -32,7 +32,7 @@ Object.keys(pkgData.dependencies || {}).concat(Object.keys(pkgData.devDependenci
 
 
 // main
-profiles.default = extend(true, {}, config, {
+profiles.release = extend(true, {}, config, {
     // main entry point
     source: preparePaths('release'),
 
@@ -41,11 +41,11 @@ profiles.default = extend(true, {}, config, {
 });
 
 // array of globs to monitor
-//profiles.default.watch = profiles.default.source;
-profiles.default.watch = path.join(config.source, 'css', '**', 'release*');
+//profiles.release.watch = profiles.release.source;
+profiles.release.watch = path.join(config.source, 'css', '**', 'release*');
 
 
-profiles.develop = extend(true, {}, profiles.default, {
+profiles.develop = extend(true, {}, profiles.release, {
     // main entry point
     source: preparePaths('develop'),
 
