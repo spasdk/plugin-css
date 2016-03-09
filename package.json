@@ -15,6 +15,9 @@
         "extend": "3.*.*",
         "spa-plugin": "spasdk/plugin"
     },
+    "devDependencies": {
+        "spa-eslint-config": "spasdk/eslint-config"
+    },
     "keywords": [
         "spa",
         "spasdk",
