@@ -37,7 +37,16 @@ profiles.release = extend(true, {}, config, {
     source: preparePaths('release'),
 
     // intended output file
-    target: path.join(config.target, 'css', 'release.css')
+    target: path.join(config.target, 'css', 'release.css'),
+
+    // info channels
+    notifications: {
+        popup: {
+            info: {icon: path.join(__dirname, 'media', 'info.png')},
+            warn: {icon: path.join(__dirname, 'media', 'warn.png')},
+            fail: {icon: path.join(__dirname, 'media', 'fail.png')}
+        }
+    }
 });
 
 // array of globs to monitor
