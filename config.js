@@ -15,7 +15,7 @@ var path     = require('path'),
 
 function preparePaths ( name ) {
     var paths = modules.map(function ( moduleName ) {
-        return path.join('node_modules', moduleName, 'css', name + '.css');
+        return path.join(path.dirname(require.resolve(moduleName)), 'css', name + '.css');
     });
 
     paths.push(path.join(config.source, 'css', name + '.css'));
