@@ -10,7 +10,7 @@ var path     = require('path'),
     config   = require('spa-plugin/config'),
     pkgData  = require(path.join(process.cwd(), 'package.json')),
     profiles = {},
-    modules  = ['spa-app', 'spa-component'];
+    modules  = ['spa-app'/*, 'spa-component'*/];
 
 
 function preparePaths ( name ) {
