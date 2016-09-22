@@ -18,10 +18,23 @@ function preparePaths ( name ) {
         return path.join(path.dirname(require.resolve(moduleName)), 'css', name + '.css');
     });
 
-    paths.push(path.join(config.source, 'css', name + '.css'));
+    //paths.push(path.join(config.source, 'css', name + '.css'));
 
     return paths;
 }
+
+
+// function processPackage ( data ) {
+//     Object.keys(data.dependencies || {}).concat(Object.keys(data.devDependencies || {})).forEach(function ( name ) {
+//         console.log(name);
+//         //console.log(require.resolve(name));
+//         try {
+//             console.log(processPackage(require(path.join(process.cwd(), 'node_modules', name, 'package.json'))));
+//         } catch ( error ) {
+//
+//         }
+//     });
+// }
 
 
 Object.keys(pkgData.dependencies || {}).concat(Object.keys(pkgData.devDependencies || {})).forEach(function ( name ) {
@@ -31,13 +44,16 @@ Object.keys(pkgData.dependencies || {}).concat(Object.keys(pkgData.devDependenci
 });
 
 
+//processPackage(pkgData);
+
+
 // main
 profiles.release = extend(true, {}, config, {
     // main entry point
     source: preparePaths('release'),
 
     // intended output file
-    target: path.join(config.target, 'css', 'release.css'),
+    target: path.join(config.target, 'css', 'release.sdk.css'),
 
     // info channels
     notifications: {
@@ -59,7 +75,7 @@ profiles.develop = extend(true, {}, profiles.release, {
     source: preparePaths('develop'),
 
     // intended output file
-    target: path.join(config.target, 'css', 'develop.css')
+    target: path.join(config.target, 'css', 'develop.sdk.css')
 });
 
 // array of globs to monitor
