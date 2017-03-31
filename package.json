@@ -1,6 +1,6 @@
 {
     "name": "spa-plugin-css",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Build CSS files from base and application sources.",
     "author": {
         "name": "Stanislav Kalashnik",
