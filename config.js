@@ -5,22 +5,27 @@
 
 'use strict';
 
-var path     = require('path'),
+var fs       = require('fs'),
+    path     = require('path'),
     extend   = require('extend'),
     config   = require('spa-plugin/config'),
-    pkgData  = require(path.join(process.cwd(), 'package.json')),
+    cwd      = process.cwd(),
+    pkgData  = require(path.join(cwd, 'package.json')),
     profiles = {},
-    modules  = ['spa-app'/*, 'spa-component'*/];
+    modules  = ['spa-app'/*, 'spa-component'*/],
+    nmPath   = path.join(cwd, 'node_modules');
 
 
 function preparePaths ( name ) {
-    var paths = modules.map(function ( moduleName ) {
-        return path.join(path.dirname(require.resolve(moduleName)), 'css', name + '.css');
+    return modules.map(function ( moduleName ) {
+        var fileName = path.join(nmPath, moduleName, 'css', name + '.css');
+
+        if ( !fs.existsSync(fileName) ) {
+            throw new Error('File ' + fileName + ' not found');
+        }
+
+        return fileName;
     });
-
-    //paths.push(path.join(config.source, 'css', name + '.css'));
-
-    return paths;
 }
 
 
